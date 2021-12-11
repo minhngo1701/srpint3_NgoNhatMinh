@@ -1,0 +1,50 @@
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <h1 style="padding-left: 300px; color: white">Đăng nhập</h1>
+  <p class="login-text">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-lock fa-stack-1x"></i>
+    </span>
+  </p>
+  <input type="text" class="login-username" autofocus required="true" formControlName="username"
+         placeholder="Tên tài khoản" style="text-align: center"/>
+  <div class="errors">
+    <ng-container *ngFor="let errors of validationMessage.username">
+      <ng-template
+        [ngIf]="loginForm.get('username').hasError(errors.type) && loginForm.get('username').dirty">
+        <p>{{errors.message}}</p>
+      </ng-template>
+    </ng-container>
+  </div>
+  <input type="password" class="login-password" required="true" placeholder="Mật khẩu" formControlName="password"
+         style="text-align: center"/>
+  <div class="errors">
+    <ng-container *ngFor="let errors of validationMessage.password">
+      <ng-template
+        [ngIf]="loginForm.get('password').hasError(errors.type) && loginForm.get('password').dirty">
+        <p>{{errors.message}}</p>
+      </ng-template>
+    </ng-container>
+  </div>
+  <div class="rememberme-and-forget-password">
+    <div class="col-md-6">
+      <input type="checkbox" [checked]="saveInfo" (change)="rememberMe($event.target.checked)"
+             class="form-check-inline">
+      <span style="color: white">Lưu tài khoản</span>
+    </div>
+    <div class="col-md-6">
+      <span id="span-forget-pass" routerLink="/forget/refresh-password">Quên mật khẩu</span>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div>
+      <input type="submit" name="Login" value="Xác nhận" class="login-submit rounded float-left" style="width: 100px"/>
+
+      <input type="button" [routerLink]="'/'" name="Login" value="Trở lại" class="login-submit rounded float-right"
+             style="width: 100px"/> &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+</form>
+<!--<a href="#" class="login-forgot-pass" style="font-size: 17px">Quên mật khẩu?</a>-->
+<div class="underlay-photo"></div>
+<div class="underlay-black"></div>
